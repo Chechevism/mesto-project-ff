@@ -17,14 +17,15 @@ initialCards.forEach((item) => {
 })
 
 function createCard(name, link) {
-  const cardElement = cardTemplate.cloneNode(true);
+  const cardElement = cardTemplate.querySelector('.card').cloneNode(true);
+  const cardImage = cardElement.querySelector('.card__image');
+  cardImage.alt = `Картинка карточки: ${name}`;
+  cardImage.src = link;
   cardElement.querySelector('.card__title').textContent = name;
-  cardElement.querySelector('.card__image').alt = name;
-  cardElement.querySelector('.card__image').src = link;
-  cardElement.querySelector('.card__delete-button').addEventListener('click', deleteCard);
+  cardElement.querySelector('.card__delete-button').addEventListener('click', () => removeCard(cardElement));
   return cardElement;
 }
 
-function deleteCard(event) {
-  event.target.closest('.card').remove();
+function removeCard(card) {
+  card.remove();
 }
